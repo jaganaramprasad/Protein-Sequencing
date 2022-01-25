@@ -4,6 +4,9 @@ Name:
 Roll Number:
 """
 
+import string
+
+from numpy import char
 import hw6_protein_tests as test
 
 project = "Protein" # don't edit this
@@ -29,7 +32,15 @@ Parameters: str ; int
 Returns: list of strs
 '''
 def dnaToRna(dna, startIndex):
-    return
+    list1=[]
+    dna=dna[startIndex:].replace("T", "U")
+    for i in range(0,len(dna),3):
+        list1.append(dna[i:i+3])
+    for i in list1:
+        if i=="UAA"or i=="UGA" or i=="UAG":
+          new=list1.index(i)
+          return list1[:new+1]   
+    return list1
 
 
 '''
@@ -192,7 +203,8 @@ if __name__ == "__main__":
     #test.week1Tests()
     #print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     #runWeek1()
-    test.testReadFile()
+    #test.testReadFile()
+    test.testDnaToRna()
 
     ## Uncomment these for Week 2 ##
     """
