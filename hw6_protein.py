@@ -162,7 +162,30 @@ Parameters: 2D list of strs ; 2D list of strs ; float
 Returns: 2D list of values
 '''
 def findAminoAcidDifferences(proteinList1, proteinList2, cutoff):
-    return
+    new=combineProteins(proteinList1)
+    new1=combineProteins(proteinList2)
+    new2=aminoAcidDictionary(new)
+    new3=aminoAcidDictionary(new1)
+    list1=[]
+    for i,j in new2.items():
+        if i!="Start" and i!="Stop" and i not in list1:
+            list1.append(i)
+    for i,j in new3.items():
+        if i!="Start" and i!="Stop" and i not in list1:
+            list1.append(i)
+    frequency=[]
+    for i in list1:
+        f1=0
+        f2=0
+        if i in new:
+            f1=new2[i]/len(new) 
+        if i in new1:
+            f2=new3[i]/len(new1)
+        diff=f2-f1
+        if diff>cutoff or diff<-cutoff:
+            frequency.append([i,f1,f2])
+    
+    return frequency
 
 
 '''
@@ -252,7 +275,8 @@ if __name__ == "__main__":
     #test.testSynthesizeProteins()
     #test.testCommonProteins()
     #test.testCombineProteins()
-    test.testAminoAcidDictionary()
+    #test.testAminoAcidDictionary()
+    test.testFindAminoAcidDifferences()
 
     ## Uncomment these for Week 2 ##
     """
