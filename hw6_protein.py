@@ -236,15 +236,11 @@ def makeAminoAcidLabels(proteinList1, proteinList2):
     list1=[]
     new=combineProteins(proteinList1)
     new1=combineProteins(proteinList2)
-    # print(new)
-    # print(new1)
     new2=new+new1
-    #print(new2)
     for i in new2:
         if i not in list1:
             list1.append(i)
     s=sorted(list1)
-    #print(s)
     return s
 
 
@@ -255,7 +251,18 @@ Parameters: list of strs ; 2D list of strs
 Returns: list of floats
 '''
 def setupChartData(labels, proteinList):
-    return
+    list1=[]
+    l=combineProteins(proteinList)
+    d=aminoAcidDictionary(l)
+    #print(labels)
+    for i in labels:
+        #print(i)
+        if i in d:
+            list1.append(d[i]/len(l))
+        else:
+            list1.append(0)
+
+    return list1
 
 
 '''
@@ -307,7 +314,8 @@ if __name__ == "__main__":
     #test.testAminoAcidDictionary()
     #test.testFindAminoAcidDifferences()
     #runWeek2()
-    test.testMakeAminoAcidLabels()
+    #test.testMakeAminoAcidLabels()
+    test.testSetupChartData()
 
     ## Uncomment these for Week 2 ##
     """
