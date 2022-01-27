@@ -5,6 +5,7 @@ Roll Number:
 """
 
 import string
+from xml.etree import ElementPath
 
 from numpy import char
 import hw6_protein_tests as test
@@ -313,6 +314,16 @@ Parameters: no parameters
 Returns: None
 '''
 def runFullProgram():
+    human=synthesizeProteins("data/human_p53.txt", "data/codon_table.json")
+    Elephant=synthesizeProteins("data/elephant_p53.txt", "data/codon_table.json")
+    common=commonProteins(human,Elephant)
+    acid_diff=findAminoAcidDifferences(human,Elephant,0.005)
+    display=displayTextResults(common,acid_diff)
+    distinct_lable=makeAminoAcidLabels(human,Elephant)
+    f1=setupChartData(distinct_lable,human)
+    f2=setupChartData(distinct_lable,Elephant)
+    edges=makeEdgeList(distinct_lable,acid_diff)
+    createChart(distinct_lable,f1,"human",f2,"Elephant",edgeList=edges)
     return
 
 
@@ -337,7 +348,8 @@ if __name__ == "__main__":
     #test.testMakeAminoAcidLabels()
     #test.testSetupChartData()
     #test.testCreateChart()
-    test.testMakeEdgeList()
+    #test.testMakeEdgeList()
+    runFullProgram()
 
     ## Uncomment these for Week 2 ##
     """
